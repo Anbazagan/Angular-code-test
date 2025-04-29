@@ -1,0 +1,30 @@
+<div class="search-wrapper">
+    <h2>Help Article Search</h2>
+    <div class="search-bar">
+      <input
+        [(ngModel)]="query"
+        placeholder="Search help topics..."
+      />
+      <button (click)="onSearch()">Search</button>
+    </div>
+  
+    <div *ngIf="paginatedResults.length > 0" class="results">
+      <ul>
+        <li *ngFor="let result of paginatedResults">
+          <h4>{{ result.title }}</h4>
+          <p>{{ result.description }}</p>
+        </li>
+      </ul>
+  
+      <div class="pagination">
+        <button [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">⟨ Prev</button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button [disabled]="currentPage === totalPages" (click)="changePage(currentPage + 1)">Next ⟩</button>
+      </div>
+    </div>
+  
+    <p *ngIf="!paginatedResults.length && query" class="no-results">
+      No results found.
+    </p>
+  </div>
+  
